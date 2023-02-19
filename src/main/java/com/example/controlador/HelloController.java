@@ -1,4 +1,4 @@
-package com.example.unibanco;
+package com.example.controlador;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

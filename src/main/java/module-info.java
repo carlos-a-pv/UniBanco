@@ -3,6 +3,6 @@ module com.example.unibanco {
     requires javafx.fxml;
 
 
-    opens com.example.unibanco to javafx.fxml;
-    exports com.example.unibanco;
+    opens com.example.controlador to javafx.fxml;
+    exports com.example.controlador;
 }
