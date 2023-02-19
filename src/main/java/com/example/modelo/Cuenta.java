@@ -1,4 +1,4 @@
 package com.example.modelo;
 
-public class CuenaCorriente {
+public class Cuenta {
 }
