@@ -6,11 +6,18 @@ import com.example.modelo.TipoCuenta;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
 import static com.example.controlador.AppController.INSTANCE;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PrincipalController{
@@ -27,6 +34,8 @@ public class PrincipalController{
     private TableColumn<Cliente, String> colNumeroCuenta;
     @FXML
     private TableColumn<Cliente, TipoCuenta> colTipoCuenta;
+    @FXML
+    private Button btnCrear;
 
     private Cliente clienteSeleccionado;
 
@@ -42,6 +51,19 @@ public class PrincipalController{
 
         tbClientes.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> llenarCampos(newValue));
+    }
+
+    @FXML
+    protected void onCrearButtonClick() throws IOException {
+        Parent parent = FXMLLoader.load(MainApp.class.getResource("VistaCrearCliente.fxml"));
+        Scene scene = new Scene(parent, 450, 450);
+        Stage stage = new Stage();
+        stage.setTitle("CREAR CLIENTE");
+        stage.setScene(scene);
+        stage.initOwner(btnCrear.getScene().getWindow());
+        btnCrear.getScene().getWindow().hide();
+        stage.show();
+
     }
 
     private void llenarTabla(List<Cliente> clientes) {

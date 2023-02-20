@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.PrincipalController" >
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.PrincipalController">
    <children>
       <TableView fx:id="tbClientes" layoutX="3.0" layoutY="60.0" prefHeight="288.0" prefWidth="585.0">
         <columns>
@@ -18,7 +15,7 @@
             <TableColumn fx:id="colTipoCuenta" prefWidth="136.0" text="Tipo De Cuenta" />
         </columns>
       </TableView>
-      <Button fx:id="btnCrear" layoutX="14.0" layoutY="366.0" mnemonicParsing="false" text="CREAR" />
+      <Button fx:id="btnCrear" layoutX="14.0" layoutY="366.0" mnemonicParsing="false" onAction="#onCrearButtonClick" text="CREAR" />
       <Button fx:id="btnActualizar" layoutX="90.0" layoutY="366.0" mnemonicParsing="false" text="ACTUALIZAR" />
       <Button fx:id="btnEliminar" layoutX="193.0" layoutY="366.0" mnemonicParsing="false" text="ELIMINAR" />
       <Button fx:id="btnTransaccion" layoutX="288.0" layoutY="366.0" mnemonicParsing="false" text="TRANSACCION" />

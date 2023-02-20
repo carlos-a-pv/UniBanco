@@ -17,6 +17,7 @@ public class Banco {
         empleados = new ArrayList<>();
 
         clientes.add(new Cliente("Carlos", "Perez", "1004827192", "123", TipoCuenta.CUENTA_AHORRO));
+
     }
 
     public void retirar(Cliente cliente,double cantidad){
