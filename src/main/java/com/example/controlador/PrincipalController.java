@@ -55,6 +55,8 @@ public class PrincipalController{
 
     @FXML
     protected void onCrearButtonClick() throws IOException {
+
+
         Parent parent = FXMLLoader.load(MainApp.class.getResource("VistaCrearCliente.fxml"));
         Scene scene = new Scene(parent, 450, 450);
         Stage stage = new Stage();

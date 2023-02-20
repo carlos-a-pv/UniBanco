@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="353.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="353.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.CreacionClienteController">
    <children>
       <Label layoutX="43.0" layoutY="63.0" text="Nombre">
          <font>
@@ -33,16 +36,16 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="tfTipoCuenta" layoutX="193.0" layoutY="257.0" />
       <Label layoutX="92.0" layoutY="8.0" text="CREACIÓN DE CLIENTE">
          <font>
             <Font name="Segoe Script Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnCrearCliente" layoutX="167.0" layoutY="306.0" mnemonicParsing="false" text="CREAR">
+      <Button fx:id="btnCrearCliente" layoutX="167.0" layoutY="306.0" mnemonicParsing="false" onAction="#onCrearClienteClick" text="CREAR">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <ComboBox fx:id="cbTipoCuenta" layoutX="193.0" layoutY="257.0" prefHeight="25.0" prefWidth="161.0" />
    </children>
 </AnchorPane>

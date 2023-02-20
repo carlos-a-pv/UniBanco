@@ -39,4 +39,21 @@ public class Banco {
     public List<Cliente> getClientes() {
         return this.clientes;
     }
+
+    public boolean registrarCliente(Cliente cliente) throws Exception {
+        Cliente cliente1 = clientes.stream().filter(cliente2 -> cliente2.getCedula().equals(cliente.getCedula())).findFirst().orElse(null);
+
+        if (cliente1 == null) {
+            clientes.add(cliente);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    public String generarNumeroCuenta() {
+        return Math.random();
+    }
 }
