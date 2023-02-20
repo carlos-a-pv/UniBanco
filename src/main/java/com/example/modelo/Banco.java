@@ -15,13 +15,27 @@ public class Banco {
         cuentas = new ArrayList<>();
         clientes = new ArrayList<>();
         empleados = new ArrayList<>();
+
+        clientes.add(new Cliente("Carlos", "Perez", "1004827192", "123", TipoCuenta.CUENTA_AHORRO));
     }
 
-    public void retirar(){}
-    public void depositar(){
+    public void retirar(Cliente cliente,double cantidad){
+
+
+    }
+    public void depositar(Cliente cliente,double cantidad){
+
 
     }
     public void consultar_saldo(){}
 
+    public Cuenta buscarCuenta (String numeroCuenta){
 
+        
+        return null;
+    }
+
+    public List<Cliente> getClientes() {
+        return this.clientes;
+    }
 }

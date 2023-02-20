@@ -7,21 +7,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.PrincipalController" >
    <children>
-      <TableView layoutX="3.0" layoutY="60.0" prefHeight="288.0" prefWidth="585.0">
+      <TableView fx:id="tbClientes" layoutX="3.0" layoutY="60.0" prefHeight="288.0" prefWidth="585.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Nombre" />
-          <TableColumn prefWidth="75.0" text="Apellido" />
-            <TableColumn prefWidth="75.0" text="Cedula" />
-            <TableColumn prefWidth="144.0" text="Numero De Cuenta" />
-            <TableColumn prefWidth="136.0" text="Tipo De Cuenta" />
+          <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+          <TableColumn fx:id="colApellido" prefWidth="75.0" text="Apellido" />
+            <TableColumn fx:id="colCedula" prefWidth="75.0" text="Cedula" />
+            <TableColumn fx:id="colNumeroCuenta" prefWidth="144.0" text="Numero De Cuenta" />
+            <TableColumn fx:id="colTipoCuenta" prefWidth="136.0" text="Tipo De Cuenta" />
         </columns>
       </TableView>
-      <Button layoutX="14.0" layoutY="366.0" mnemonicParsing="false" text="CREAR" />
-      <Button layoutX="90.0" layoutY="366.0" mnemonicParsing="false" text="ACTUALIZAR" />
-      <Button layoutX="193.0" layoutY="366.0" mnemonicParsing="false" text="ELIMINAR" />
-      <Button layoutX="288.0" layoutY="366.0" mnemonicParsing="false" text="TRANSACCION" />
+      <Button fx:id="btnCrear" layoutX="14.0" layoutY="366.0" mnemonicParsing="false" text="CREAR" />
+      <Button fx:id="btnActualizar" layoutX="90.0" layoutY="366.0" mnemonicParsing="false" text="ACTUALIZAR" />
+      <Button fx:id="btnEliminar" layoutX="193.0" layoutY="366.0" mnemonicParsing="false" text="ELIMINAR" />
+      <Button fx:id="btnTransaccion" layoutX="288.0" layoutY="366.0" mnemonicParsing="false" text="TRANSACCION" />
       <Label layoutX="234.0" prefHeight="54.0" prefWidth="187.0" text="Uni" textFill="#2000d3">
          <font>
             <Font name="Segoe Script Bold" size="29.0" />
