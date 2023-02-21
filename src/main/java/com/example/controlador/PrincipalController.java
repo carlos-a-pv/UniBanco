@@ -4,24 +4,34 @@ import com.example.modelo.Cliente;
 import com.example.modelo.Banco;
 import com.example.modelo.TipoCuenta;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import static com.example.controlador.AppController.INSTANCE;
+import static com.example.modelo.Cliente.eliminarCliente;
 
 import java.io.IOException;
 import java.util.List;
 
 public class PrincipalController{
-
+    @FXML
+    private ComboBox cbTipoCuenta;
+    @FXML
+    private TextField getTextNumCuenta;
+    @FXML
+    private TextField getTextNombre;
+    @FXML
+    private TextField getTextApellido;
+    @FXML
+    private TextField getTextCedula;
     @FXML
     private TableView<Cliente> tbClientes;
     @FXML
@@ -36,12 +46,16 @@ public class PrincipalController{
     private TableColumn<Cliente, TipoCuenta> colTipoCuenta;
     @FXML
     private Button btnCrear;
+    @FXML
+    private Button btnTransaccion;
+
+
 
     private Cliente clienteSeleccionado;
 
     @FXML
     public void initialize() {
-
+        cbTipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
         llenarTabla(INSTANCE.getModel().getClientes());
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colApellido.setCellValueFactory((new PropertyValueFactory<>("apellido")));
@@ -76,15 +90,39 @@ public class PrincipalController{
         clienteSeleccionado = cliente;
         if (cliente != null) {
 
-
-            /*tfNumeroIdentificacion.setText(empleado.getId());
-            tfNombre.setText(empleado.getNombre());
-            tfCorreo.setText(empleado.getEmail());
-            cbGenero.setValue(empleado.getGenero());
-            tfContrasena.setText(empleado.getPassword());*/
+           getTextNombre.setText(cliente.getNombre());
+            getTextApellido.setText(cliente.getApellido());
+            getTextCedula.setText(cliente.getCedula());
+            getTextNumCuenta.setText(cliente.getNumeroCuenta());
+            cbTipoCuenta.setValue(cliente.getTipoCuenta());
 
         }
     }
 
+    @FXML
+    public void onActionVentanaTrasaccion(ActionEvent actionEvent) {
 
+
+    }
+    @FXML
+    public void onActionActualizar(ActionEvent actionEvent) {
+        Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
+        cliente.setNombre(getTextNombre.getText());
+        cliente.setApellido(getTextApellido.getText());
+        cliente.setCedula(getTextCedula.getText());
+        cliente.setNumeroCuenta(getTextNumCuenta.getText());
+        cliente.setTipoCuenta((TipoCuenta) cbTipoCuenta.getValue());
+        tbClientes.refresh();
+    }
+    @FXML
+    public void obtenerCliente(MouseEvent mouseEvent) {
+        Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
+
+    }
+
+    public void onEliminar(ActionEvent actionEvent) {
+
+       Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
+       eliminarCliente(cliente);
+    }
 }

@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.PrincipalController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controlador.PrincipalController">
    <children>
-      <TableView fx:id="tbClientes" layoutX="3.0" layoutY="60.0" prefHeight="288.0" prefWidth="585.0">
+      <TableView fx:id="tbClientes" layoutX="3.0" layoutY="60.0" onMouseClicked="#obtenerCliente" prefHeight="528.0" prefWidth="531.0">
         <columns>
           <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
           <TableColumn fx:id="colApellido" prefWidth="75.0" text="Apellido" />
@@ -15,10 +20,22 @@
             <TableColumn fx:id="colTipoCuenta" prefWidth="136.0" text="Tipo De Cuenta" />
         </columns>
       </TableView>
-      <Button fx:id="btnCrear" layoutX="14.0" layoutY="366.0" mnemonicParsing="false" onAction="#onCrearButtonClick" text="CREAR" />
-      <Button fx:id="btnActualizar" layoutX="90.0" layoutY="366.0" mnemonicParsing="false" text="ACTUALIZAR" />
-      <Button fx:id="btnEliminar" layoutX="193.0" layoutY="366.0" mnemonicParsing="false" text="ELIMINAR" />
-      <Button fx:id="btnTransaccion" layoutX="288.0" layoutY="366.0" mnemonicParsing="false" text="TRANSACCION" />
+      <Button fx:id="btnCrear" layoutX="46.0" layoutY="621.0" mnemonicParsing="false" onAction="#onCrearButtonClick" text="CREAR">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="btnActualizar" layoutX="215.0" layoutY="621.0" mnemonicParsing="false" onAction="#onActionActualizar" text="ACTUALIZAR">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="btnEliminar" layoutX="478.0" layoutY="621.0" mnemonicParsing="false" onAction="#onEliminar" text="ELIMINAR">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="btnTransaccion" layoutX="674.0" layoutY="621.0" mnemonicParsing="false" onAction="#onActionVentanaTrasaccion" text="TRANSACCION">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
       <Label layoutX="234.0" prefHeight="54.0" prefWidth="187.0" text="Uni" textFill="#2000d3">
          <font>
             <Font name="Segoe Script Bold" size="29.0" />
@@ -29,5 +46,35 @@
             <Font name="Segoe Script Bold" size="29.0" />
          </font>
       </Label>
+      <Label layoutX="643.0" layoutY="95.0" text="Nombre">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="624.0" layoutY="464.0" text="Tipo de cuenta">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="608.0" layoutY="359.0" text="Numero de cuenta">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="642.0" layoutY="181.0" text="Apellido">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="650.0" layoutY="271.0" text="Cedula">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="getTextApellido" layoutX="583.0" layoutY="229.0" prefWidth="180.0" />
+      <TextField fx:id="getTextNombre" layoutX="585.0" layoutY="140.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="getTextNumCuenta" layoutX="583.0" layoutY="410.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="getTextCedula" layoutX="585.0" layoutY="313.0" prefHeight="25.0" prefWidth="180.0" />
+      <ComboBox fx:id="cbTipoCuenta" layoutX="583.0" layoutY="501.0" prefHeight="25.0" prefWidth="180.0" />
    </children>
 </Pane>
