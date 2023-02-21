@@ -58,6 +58,6 @@ public class Cliente {
 
 
     public static void eliminarCliente(Cliente cliente) {
-    Banco.eliminarCliente(cliente);
+//    Banco.eliminarCliente(cliente);
     }
 }
