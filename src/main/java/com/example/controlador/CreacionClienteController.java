@@ -1,6 +1,7 @@
 package com.example.controlador;
 
 import com.example.modelo.Cliente;
+import com.example.modelo.Cuenta;
 import com.example.modelo.TipoCuenta;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -53,7 +54,7 @@ public class CreacionClienteController {
             String numeroCuenta = tfNumeroCuenta.getText();
             TipoCuenta tipoCuenta = (TipoCuenta) cbTipoCuenta.getValue();
 
-            if (INSTANCE.getModel().registrarCliente(new Cliente(nombre, apellido, cedula, numeroCuenta, tipoCuenta)) == true){
+            if (INSTANCE.getModel().registrarCliente(new Cliente(nombre, apellido, cedula, tipoCuenta,new Cuenta())) == true){
                 Parent parent = FXMLLoader.load(MainApp.class.getResource("VentanaPrincipal.fxml"));
                 Scene scene = new Scene(parent, 450, 450);
                 Stage stage = new Stage();

@@ -10,13 +10,13 @@ public class Banco {
     private List<Cliente> clientes;
     private List<Empleado> empleados;
 
-    public Banco(){
+    public Banco() {
         transacciones = new ArrayList<>();
         cuentas = new ArrayList<>();
         clientes = new ArrayList<>();
         empleados = new ArrayList<>();
 
-        clientes.add(new Cliente("Carlos", "Perez", "1004827192", "123", TipoCuenta.CUENTA_AHORRO));
+        clientes.add(new Cliente("Carlos", "Perez", "1004827192", TipoCuenta.CUENTA_AHORRO,new Cuenta()));
 
     }
 
@@ -25,19 +25,46 @@ public class Banco {
     }
 
 
-    public void retirar(Cliente cliente,double cantidad){
-
+    public boolean retirar(String numCuenta, double cantidad) {
+        Cliente cuentaAux = clientes.stream().filter(cuenta -> cuenta.getCuenta().getNumCuenta().equals(numCuenta)).findFirst().orElse(null);
+        if(cuentaAux == null){
+            return false;
+        } else if (cuentaAux.getCuenta().getSaldo()< cantidad ) {
+            return false;
+        }
+        else {
+            cuentaAux.getCuenta().setSaldo(cuentaAux.getCuenta().getSaldo()-cantidad);
+            return true;
+        }
 
     }
-    public void depositar(Cliente cliente,double cantidad){
 
+    public boolean depositar(String numCuenta, double cantidad) {
+
+        Cliente cuentaAux = clientes.stream().filter(cuenta -> cuenta.getCuenta().getNumCuenta().equals(numCuenta)).findFirst().orElse(null);
+        if(cuentaAux == null){
+            return false;
+        }
+        else {
+            cuentaAux.getCuenta().setSaldo(cantidad+cuentaAux.getCuenta().getSaldo());
+            return true;
+        }
 
     }
-    public void consultar_saldo(){}
 
-    public Cuenta buscarCuenta (String numeroCuenta){
+    public double consultar_saldo(String numCuenta) {
 
-        
+        Cliente cuentaAux = clientes.stream().filter(cuenta -> cuenta.getCuenta().getNumCuenta().equals(numCuenta)).findFirst().orElse(null);
+        if (cuentaAux == null)
+            return 0;
+        else {
+            return  cuentaAux.getCuenta().getSaldo();
+        }
+    }
+
+    public Cuenta buscarCuenta(String numeroCuenta) {
+
+
         return null;
     }
 
@@ -54,11 +81,40 @@ public class Banco {
         } else {
             return false;
         }
-
     }
 
 
-//    public String generarNumeroCuenta() {
-//        return Math.random();
-//    }
+    public boolean validarCedula (String cedula){
+
+        if(clientes.stream().map(cliente -> cliente.getCedula().equals(cedula)).findFirst().orElse(null)!= null) {
+            return false;
+        }
+        else {
+            return true;
+        }
+        }
+    public boolean validarNumeroCuenta (String numeroCuenta){
+            if(clientes.stream().map(cliente -> cliente.getCuenta().getNumCuenta().equals(numeroCuenta)).findFirst().orElse(null)!= null) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+    public boolean actualizarCliente(Cliente clienteselection, Cliente cliente) {
+        if (cliente != null && clienteselection != null && clientes.stream().filter(cliente1 -> cliente1.getCedula()==cliente.getCedula()).findFirst().orElse(null) != null ) {
+            clienteselection.setNombre(cliente.getNombre());
+            clienteselection.setApellido(cliente.getApellido());
+            clienteselection.setCedula(cliente.getCedula());
+            clienteselection.setTipoCuenta(cliente.getTipoCuenta());
+
+            return true;
+        }
+        else {
+            return  false;
+        }
+    }
 }
+
+

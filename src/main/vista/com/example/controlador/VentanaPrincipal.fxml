@@ -51,12 +51,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="624.0" layoutY="464.0" text="Tipo de cuenta">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="608.0" layoutY="359.0" text="Numero de cuenta">
+      <Label layoutX="624.0" layoutY="387.0" text="Tipo de cuenta">
          <font>
             <Font size="15.0" />
          </font>
@@ -71,10 +66,9 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="getTextApellido" layoutX="583.0" layoutY="229.0" prefWidth="180.0" />
       <TextField fx:id="getTextNombre" layoutX="585.0" layoutY="140.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField fx:id="getTextNumCuenta" layoutX="583.0" layoutY="410.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="getTextApellido" layoutX="583.0" layoutY="229.0" prefWidth="180.0" />
       <TextField fx:id="getTextCedula" layoutX="585.0" layoutY="313.0" prefHeight="25.0" prefWidth="180.0" />
-      <ComboBox fx:id="cbTipoCuenta" layoutX="583.0" layoutY="501.0" prefHeight="25.0" prefWidth="180.0" />
+      <ComboBox fx:id="cbTipoCuenta" layoutX="583.0" layoutY="424.0" prefHeight="25.0" prefWidth="180.0" />
    </children>
 </Pane>
