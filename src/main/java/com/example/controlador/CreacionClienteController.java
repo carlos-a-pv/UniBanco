@@ -3,6 +3,7 @@ package com.example.controlador;
 import com.example.modelo.Cliente;
 import com.example.modelo.TipoCuenta;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,8 +32,13 @@ public class CreacionClienteController {
     private Button btnCrearCliente;
 
     @FXML
+    private Button btnVolverInicio;
+
+
+
+    @FXML
     public void initialize() {
-        tfNumeroCuenta.setText( INSTANCE.getModel().generarNumeroCuenta() );
+//        tfNumeroCuenta.setText( INSTANCE.getModel().generarNumeroCuenta() );
         cbTipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
     }
 
@@ -67,6 +73,7 @@ public class CreacionClienteController {
         }
     }
 
+
     private void mostrarMensajeAdvertencia(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Advertencia");
@@ -74,5 +81,16 @@ public class CreacionClienteController {
         alert.showAndWait();
     }
 
+    @FXML
+    public void onVolverVentanaPrinipal(ActionEvent actionEvent) throws Exception {
+        Parent parent = FXMLLoader.load(MainApp.class.getResource("VentanaPrincipal.fxml"));
+        Scene scene = new Scene(parent, 900, 900);
+        Stage stage = new Stage();
+        stage.setTitle("CREAR CLIENTE");
+        stage.setScene(scene);
+        stage.initOwner(btnCrearCliente.getScene().getWindow());
+        btnCrearCliente.getScene().getWindow().hide();
+        stage.show();
 
+    }
 }

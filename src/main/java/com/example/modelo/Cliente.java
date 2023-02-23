@@ -2,6 +2,7 @@ package com.example.modelo;
 
 public class Cliente {
 
+
     private String nombre;
     private String apellido;
     private String cedula;
@@ -55,4 +56,8 @@ public class Cliente {
         this.tipoCuenta = tipoCuenta;
     }
 
+
+    public static void eliminarCliente(Cliente cliente) {
+//    Banco.eliminarCliente(cliente);
+    }
 }

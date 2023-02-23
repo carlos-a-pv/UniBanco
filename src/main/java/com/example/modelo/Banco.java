@@ -20,6 +20,11 @@ public class Banco {
 
     }
 
+    public void eliminar(Cliente cliente) {
+        clientes.remove(cliente);
+    }
+
+
     public void retirar(Cliente cliente,double cantidad){
 
 
@@ -53,7 +58,7 @@ public class Banco {
     }
 
 
-    public String generarNumeroCuenta() {
-        return Math.random();
-    }
+//    public String generarNumeroCuenta() {
+//        return Math.random();
+//    }
 }
