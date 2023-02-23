@@ -1,4 +1,6 @@
 package com.example.modelo;
 
-public class CuentaAhorro {
+public class CuentaAhorro extends Cuenta{
+
+
 }

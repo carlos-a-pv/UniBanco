@@ -2,6 +2,7 @@ package com.example.controlador;
 
 import com.example.modelo.Cliente;
 import com.example.modelo.Banco;
+import com.example.modelo.Cuenta;
 import com.example.modelo.TipoCuenta;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import static com.example.controlador.AppController.INSTANCE;
-import static com.example.modelo.Cliente.eliminarCliente;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -60,7 +61,7 @@ public class PrincipalController{
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colApellido.setCellValueFactory((new PropertyValueFactory<>("apellido")));
         colCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-        colNumeroCuenta.setCellValueFactory(new PropertyValueFactory<>("numeroCuenta"));
+        colNumeroCuenta.setCellValueFactory(new PropertyValueFactory<>("cuenta"));
         colTipoCuenta.setCellValueFactory((new PropertyValueFactory<>("tipoCuenta")));
 
         tbClientes.getSelectionModel().selectedItemProperty()
@@ -93,27 +94,49 @@ public class PrincipalController{
            getTextNombre.setText(cliente.getNombre());
             getTextApellido.setText(cliente.getApellido());
             getTextCedula.setText(cliente.getCedula());
-            getTextNumCuenta.setText(cliente.getNumeroCuenta());
             cbTipoCuenta.setValue(cliente.getTipoCuenta());
 
         }
     }
 
     @FXML
-    public void onActionVentanaTrasaccion(ActionEvent actionEvent) {
-
+    public void onActionVentanaTrasaccion(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(MainApp.class.getResource("VistaTipoTransaccion.fxml"));
+        Scene scene = new Scene(parent, 600, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Transaccion");
+        stage.setScene(scene);
+        stage.initOwner(btnTransaccion.getScene().getWindow());
+        btnTransaccion.getScene().getWindow().hide();
+        stage.show();
 
     }
     @FXML
-    public void onActionActualizar(ActionEvent actionEvent) {
+    public void onActionActualizar(ActionEvent actionEvent) throws Exception {
         Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
-        cliente.setNombre(getTextNombre.getText());
-        cliente.setApellido(getTextApellido.getText());
-        cliente.setCedula(getTextCedula.getText());
-        cliente.setNumeroCuenta(getTextNumCuenta.getText());
-        cliente.setTipoCuenta((TipoCuenta) cbTipoCuenta.getValue());
-        tbClientes.refresh();
+//        double saldo = cliente.getCuenta().getSaldo() ;
+
+
+
+            String nombre = getTextNombre.getText();
+            String apellido = getTextApellido.getText();
+            String cedula = getTextCedula.getText();
+            TipoCuenta tipoCuenta = (TipoCuenta) cbTipoCuenta.getValue();
+
+
+            if (INSTANCE.getModel().actualizarCliente(cliente,new Cliente(nombre, apellido, cedula, tipoCuenta,new Cuenta()))) {
+                tbClientes.setItems(FXCollections.observableArrayList(INSTANCE.getModel().getClientes()));
+                limpiarCampos();
+                tbClientes.refresh();
+            }
+         else{
+
+                mostrarMensajeAdvertencia("El Cliente ya existe");
+                limpiarCampos();
+
+        }
     }
+
     @FXML
     public void obtenerCliente(MouseEvent mouseEvent) {
         Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
@@ -130,30 +153,40 @@ public class PrincipalController{
     @FXML
     public void onCrearButtonClick(ActionEvent actionEvent) throws Exception {
 
-        if(getTextNombre != null && getTextApellido != null && getTextCedula!= null && getTextNumCuenta != null && cbTipoCuenta != null){
+        if(getTextNombre.getText() != null && getTextApellido.getText() != null && getTextCedula.getText()!= null && cbTipoCuenta != null){
             String nombre = getTextNombre.getText();
             String apellido = getTextApellido.getText();
             String cedula = getTextCedula.getText();
-            String numeroCuenta = getTextNumCuenta.getText();
             TipoCuenta tipoCuenta = (TipoCuenta) cbTipoCuenta.getValue();
 
-            if (INSTANCE.getModel().registrarCliente(new Cliente (nombre, apellido, cedula, numeroCuenta, tipoCuenta))){
-                mostrarMensajeAdvertencia("El cliente ha sido creado con exito");
+
+
+            if (INSTANCE.getModel().registrarCliente(new Cliente (nombre, apellido, cedula, tipoCuenta,new Cuenta()))){
                 tbClientes.setItems(FXCollections.observableArrayList(INSTANCE.getModel().getClientes()));
+                limpiarCampos();
                 tbClientes.refresh();
             }else{
                 mostrarMensajeAdvertencia("EL CLIENTE YA EXISTE");
-                getTextNombre.setText("");
-                getTextApellido.setText("");
-                getTextCedula.setText("");
-                getTextNumCuenta.setText("");
-                cbTipoCuenta.setValue(null);
+                limpiarCampos();
             }
         }
     }
+
     private void mostrarMensajeAdvertencia(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Advertencia");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+    private void limpiarCampos(){
+        getTextNombre.setText("");
+        getTextApellido.setText("");
+        getTextCedula.setText("");
+        cbTipoCuenta.setValue(null);
+    }
+    private void mostrarMensajeInformacion(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
         alert.setContentText(mensaje);
         alert.showAndWait();
     }

@@ -6,15 +6,25 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String cedula;
-    private String numeroCuenta;
+
     private TipoCuenta tipoCuenta;
 
-    public Cliente(String nombre, String apellido, String cedula, String numeroCuenta, TipoCuenta tipoCuenta){
+    private Cuenta cuenta;
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public Cliente(String nombre, String apellido, String cedula, TipoCuenta tipoCuenta, Cuenta cuenta){
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
-        this.numeroCuenta = numeroCuenta;
         this.tipoCuenta = tipoCuenta;
+        this.cuenta = cuenta;
     }
     public String getNombre(){
         return this.nombre;
@@ -40,13 +50,7 @@ public class Cliente {
         this.cedula = cedula;
     }
 
-    public String getNumeroCuenta() {
-        return numeroCuenta;
-    }
 
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
 
     public TipoCuenta getTipoCuenta() {
         return tipoCuenta;
@@ -56,8 +60,4 @@ public class Cliente {
         this.tipoCuenta = tipoCuenta;
     }
 
-
-    public static void eliminarCliente(Cliente cliente) {
-//    Banco.eliminarCliente(cliente);
-    }
 }
