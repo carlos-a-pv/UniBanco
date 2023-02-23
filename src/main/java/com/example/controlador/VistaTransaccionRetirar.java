@@ -1,5 +1,8 @@
 package com.example.controlador;
 
+import com.example.modelo.Estado;
+import com.example.modelo.Retiro;
+import com.example.modelo.Transaccion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
 
 import static com.example.controlador.AppController.INSTANCE;
 
@@ -22,16 +27,28 @@ public class VistaTransaccionRetirar {
     public void OnRetirarClick(){
 
         String numCuenta = tfNumCuenta.getText();
-        double cantRetirar = Double.parseDouble(tfCantRetirar.getText());
+        String cantRetirar = tfCantRetirar.getText();
 
-        if (INSTANCE.getModel().retirar(numCuenta,cantRetirar)){
+        if(!numCuenta.equals(null) && !cantRetirar.equals(null)){
 
-            mostrarMensajeInformacion("El retiro ha sido Exitoso");
+            if(INSTANCE.getModel().validarNumeroCuenta(numCuenta)){
+                Double cantRetirar2 = Double.parseDouble(tfCantRetirar.getText());
+                if (INSTANCE.getModel().retirar(numCuenta,cantRetirar2)){
+                    mostrarMensajeInformacion("El retiro ha sido Exitoso");
+                    INSTANCE.getModel().addTransaccion(new Transaccion(cantRetirar2, Estado.EXISTOSA, new Retiro(), LocalDate.now()));
+                }else {
+                    mostrarMensajeInformacion("Fondos insuficientes");
+                    INSTANCE.getModel().addTransaccion(new Transaccion(0.0, Estado.SIN_FONDOS, new Retiro(), LocalDate.now()));
+                }
+            }else{
+                mostrarMensajeAdvertencia("La cuenta no se encuentra registrada.");
+                INSTANCE.getModel().addTransaccion(new Transaccion(0.0, Estado.RECHAZADA, new Retiro(), LocalDate.now()));
+                tfCantRetirar.setText("");
+                tfNumCuenta.setText("");
+            }
+        }else{
+            mostrarMensajeAdvertencia("LENE LOS CAMPOS!!!");
         }
-        else {
-            mostrarMensajeInformacion("Fondos insuficientes");
-        }
-
     }
     public  void OnVolverAtras() throws Exception{
         Parent parent = FXMLLoader.load(MainApp.class.getResource("VistaTipoTransaccion.fxml"));
@@ -48,6 +65,13 @@ public class VistaTransaccionRetirar {
     private void mostrarMensajeInformacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Información");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void mostrarMensajeAdvertencia(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Advertencia");
         alert.setContentText(mensaje);
         alert.showAndWait();
     }

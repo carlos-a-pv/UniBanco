@@ -1,5 +1,8 @@
 package com.example.controlador;
 
+import com.example.modelo.Deposito;
+import com.example.modelo.Estado;
+import com.example.modelo.Transaccion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static com.example.controlador.AppController.INSTANCE;
 public class VistaTransaccionDepositar {
@@ -22,14 +28,22 @@ public class VistaTransaccionDepositar {
     @FXML
     private Button btnVolver;
 
-    public void OnDepositarClick(ActionEvent actionEvent) {
+    public void OnDepositarClick(ActionEvent actionEvent) throws Exception {
 
         String numCuenta = tfNumCuenta.getText();
         double cantDepositar = Double.parseDouble(tfCantDepositar.getText());
 
        if (INSTANCE.getModel().depositar(numCuenta,cantDepositar)){
 
-        mostrarMensajeInformacion("El deposito ha sido Exitoso");
+           INSTANCE.getModel().addTransaccion(new Transaccion(cantDepositar, Estado.EXISTOSA, new Deposito(), LocalDate. now()));
+
+             mostrarMensajeInformacion("El deposito ha sido Exitoso");
+             OnVolverAtras();
+       }else{
+           mostrarMensajeAdvertencia("La cuenta no se encuentra registrada");
+           tfNumCuenta.setText("");
+           tfCantDepositar.setText("");
+
        }
 
     }
@@ -48,5 +62,11 @@ public class VistaTransaccionDepositar {
         stage.initOwner(btnVolver.getScene().getWindow());
         btnVolver.getScene().getWindow().hide();
         stage.show();
+    }
+    private void mostrarMensajeAdvertencia(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Advertencia");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

@@ -27,9 +27,7 @@ public class Banco {
 
     public boolean retirar(String numCuenta, double cantidad) {
         Cliente cuentaAux = clientes.stream().filter(cuenta -> cuenta.getCuenta().getNumCuenta().equals(numCuenta)).findFirst().orElse(null);
-        if(cuentaAux == null){
-            return false;
-        } else if (cuentaAux.getCuenta().getSaldo()< cantidad ) {
+        if(cuentaAux.getCuenta().getSaldo()< cantidad) {
             return false;
         }
         else {
@@ -114,6 +112,14 @@ public class Banco {
         else {
             return  false;
         }
+    }
+
+    public void addTransaccion(Transaccion transaccion) {
+        transacciones.add(transaccion);
+    }
+
+    public List<Transaccion> getTransaccione() {
+        return this.transacciones;
     }
 }
 

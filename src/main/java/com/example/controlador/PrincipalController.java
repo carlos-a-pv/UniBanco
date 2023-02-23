@@ -49,6 +49,8 @@ public class PrincipalController{
     private Button btnCrear;
     @FXML
     private Button btnTransaccion;
+    @FXML
+    private Button btnTransacciones;
 
 
 
@@ -189,5 +191,16 @@ public class PrincipalController{
         alert.setTitle("Información");
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    public void OnTransaccionesClick(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(MainApp.class.getResource("VistaTransacciones.fxml"));
+        Scene scene = new Scene(parent, 600, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Transaccion");
+        stage.setScene(scene);
+        stage.initOwner(btnTransaccion.getScene().getWindow());
+        btnTransaccion.getScene().getWindow().hide();
+        stage.show();
     }
 }
